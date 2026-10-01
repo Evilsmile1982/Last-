@@ -8,18 +8,32 @@ permissions:
 
 jobs:
   build:
-    name: APK erstellen
-    runs-on: ubuntu-latest
+    name: Auto Check APK
+    runs-on: ubuntu-24.04
 
     steps:
 
+      # =====================================================
+      # 1. Repository
+      # =====================================================
+
       - name: Repository auschecken
         uses: actions/checkout@v4
+
+
+      # =====================================================
+      # 2. Node.js
+      # =====================================================
 
       - name: Node.js einrichten
         uses: actions/setup-node@v4
         with:
           node-version: 22
+
+
+      # =====================================================
+      # 3. Java
+      # =====================================================
 
       - name: Java einrichten
         uses: actions/setup-java@v4
@@ -27,94 +41,245 @@ jobs:
           distribution: temurin
           java-version: '21'
 
-      # Android Commandline Tools installieren
+
+      # =====================================================
+      # 4. Android SDK installieren
+      # =====================================================
+
       - name: Android SDK installieren
         shell: bash
         run: |
           set -e
 
-          export ANDROID_SDK_ROOT="$HOME/android-sdk"
-          export ANDROID_HOME="$ANDROID_SDK_ROOT"
+          SDK_ROOT="$RUNNER_TEMP/android-sdk"
+          CMDLINE_TOOLS="$SDK_ROOT/cmdline-tools/latest"
+          SDKMANAGER="$CMDLINE_TOOLS/bin/sdkmanager"
 
-          mkdir -p "$ANDROID_SDK_ROOT/cmdline-tools"
+          echo "SDK_ROOT=$SDK_ROOT"
+
+          mkdir -p "$CMDLINE_TOOLS"
 
           cd "$RUNNER_TEMP"
 
-          wget -q \
-            https://dl.google.com/android/repository/commandlinetools-linux-13114758_latest.zip \
-            -O android-tools.zip
+          echo "Lade Android Command Line Tools..."
 
-          unzip -q android-tools.zip
+          curl -L --fail \
+            "https://dl.google.com/android/repository/commandlinetools-linux-13114758_latest.zip" \
+            -o android-commandline-tools.zip
 
-          mkdir -p "$ANDROID_SDK_ROOT/cmdline-tools/latest"
+          echo "Entpacke Android Command Line Tools..."
 
-          mv cmdline-tools/* \
-            "$ANDROID_SDK_ROOT/cmdline-tools/latest/"
+          rm -rf "$RUNNER_TEMP/cmdline-tools"
 
-          echo "ANDROID_HOME=$ANDROID_HOME" >> "$GITHUB_ENV"
-          echo "ANDROID_SDK_ROOT=$ANDROID_SDK_ROOT" >> "$GITHUB_ENV"
-          echo "$ANDROID_SDK_ROOT/cmdline-tools/latest/bin" >> "$GITHUB_PATH"
-          echo "$ANDROID_SDK_ROOT/platform-tools" >> "$GITHUB_PATH"
+          unzip -q \
+            android-commandline-tools.zip \
+            -d "$RUNNER_TEMP"
 
-          yes | sdkmanager --licenses >/dev/null || true
+          cp -R \
+            "$RUNNER_TEMP/cmdline-tools/." \
+            "$CMDLINE_TOOLS/"
 
-          sdkmanager \
+          echo "Prüfe sdkmanager..."
+
+          test -f "$SDKMANAGER"
+
+          chmod +x "$SDKMANAGER"
+
+          echo "sdkmanager gefunden:"
+          "$SDKMANAGER" --version
+
+          echo "Setze Android-Umgebung..."
+
+          echo "ANDROID_HOME=$SDK_ROOT" >> "$GITHUB_ENV"
+          echo "ANDROID_SDK_ROOT=$SDK_ROOT" >> "$GITHUB_ENV"
+
+          echo "$CMDLINE_TOOLS/bin" >> "$GITHUB_PATH"
+          echo "$SDK_ROOT/platform-tools" >> "$GITHUB_PATH"
+
+          export ANDROID_HOME="$SDK_ROOT"
+          export ANDROID_SDK_ROOT="$SDK_ROOT"
+          export PATH="$CMDLINE_TOOLS/bin:$SDK_ROOT/platform-tools:$PATH"
+
+          echo "Akzeptiere Android-Lizenzen..."
+
+          yes | "$SDKMANAGER" --licenses > /dev/null || true
+
+          echo "Installiere Android Komponenten..."
+
+          "$SDKMANAGER" \
             "platform-tools" \
             "platforms;android-35" \
             "build-tools;35.0.0"
 
+          echo "Android SDK erfolgreich eingerichtet."
+
+
+      # =====================================================
+      # 5. Android SDK prüfen
+      # =====================================================
+
       - name: Android SDK prüfen
+        shell: bash
         run: |
-          sdkmanager --version
+          set -e
+
+          echo "ANDROID_HOME=$ANDROID_HOME"
+          echo "ANDROID_SDK_ROOT=$ANDROID_SDK_ROOT"
+
+          SDKMANAGER="$ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager"
+
+          "$SDKMANAGER" --version
+
           adb version
 
-      # Web-App vorbereiten
-      - name: Web-App vorbereiten
-        run: |
-          mkdir -p web
-          cp -r extracted/. web/
+          ls -la "$ANDROID_SDK_ROOT/platforms"
 
-      # Capacitor Projekt
+          ls -la "$ANDROID_SDK_ROOT/build-tools"
+
+
+      # =====================================================
+      # 6. Web-App vorbereiten
+      # =====================================================
+
+      - name: Web-App vorbereiten
+        shell: bash
+        run: |
+          set -e
+
+          rm -rf web
+          mkdir -p web
+
+          cp -R extracted/. web/
+
+          echo "Web-App Dateien:"
+          find web -maxdepth 2 -type f | sort
+
+
+      # =====================================================
+      # 7. Node Projekt erstellen
+      # =====================================================
+
       - name: package.json erstellen
+        shell: bash
         run: |
           cat > package.json <<'EOF'
           {
             "name": "auto-check",
             "version": "1.0.0",
             "private": true,
+            "description": "Auto Check Android App",
             "dependencies": {
-              "@capacitor/core": "latest"
+              "@capacitor/core": "7.4.4",
+              "@capacitor/android": "7.4.4"
             },
             "devDependencies": {
-              "@capacitor/cli": "latest"
+              "@capacitor/cli": "7.4.4"
             }
           }
           EOF
 
-      - name: Capacitor Konfiguration erstellen
+          cat package.json
+
+
+      # =====================================================
+      # 8. Capacitor konfigurieren
+      # =====================================================
+
+      - name: Capacitor konfigurieren
+        shell: bash
         run: |
           cat > capacitor.config.json <<'EOF'
           {
             "appId": "com.evilsmile1982.autocheck",
             "appName": "Auto Check",
-            "webDir": "web"
+            "webDir": "web",
+            "server": {
+              "androidScheme": "https"
+            }
           }
           EOF
+
+          cat capacitor.config.json
+
+
+      # =====================================================
+      # 9. NPM installieren
+      # =====================================================
 
       - name: NPM installieren
         run: npm install
 
-      - name: Android-Projekt erstellen
+
+      # =====================================================
+      # 10. Capacitor Android Projekt
+      # =====================================================
+
+      - name: Android Projekt erstellen
         run: npx cap add android
+
+
+      # =====================================================
+      # 11. Web-App nach Android übertragen
+      # =====================================================
 
       - name: Web-App synchronisieren
         run: npx cap sync android
 
-      - name: APK bauen
-        working-directory: android
+
+      # =====================================================
+      # 12. Android Projekt prüfen
+      # =====================================================
+
+      - name: Android Projekt prüfen
+        shell: bash
         run: |
+          echo "Android Projekt:"
+          find android -maxdepth 2 -type f | sort | head -100
+
+
+      # =====================================================
+      # 13. APK bauen
+      # =====================================================
+
+      - name: Debug APK bauen
+        working-directory: android
+        shell: bash
+        run: |
+          set -e
+
           chmod +x gradlew
-          ./gradlew assembleDebug --no-daemon
+
+          ./gradlew \
+            assembleDebug \
+            --no-daemon \
+            --stacktrace
+
+
+      # =====================================================
+      # 14. APK prüfen
+      # =====================================================
+
+      - name: APK prüfen
+        shell: bash
+        run: |
+          set -e
+
+          echo "Gefundene APK Dateien:"
+
+          find android/app/build/outputs \
+            -type f \
+            -name "*.apk" \
+            -print
+
+          test -f \
+            android/app/build/outputs/apk/debug/app-debug.apk
+
+          echo "APK erfolgreich erstellt."
+
+
+      # =====================================================
+      # 15. APK als Download bereitstellen
+      # =====================================================
 
       - name: APK hochladen
         uses: actions/upload-artifact@v4
@@ -122,3 +287,4 @@ jobs:
           name: Auto-Check-APK
           path: android/app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
+          retention-days: 7
