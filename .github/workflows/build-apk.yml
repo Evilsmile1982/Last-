@@ -1,0 +1,95 @@
+name: Android APK bauen
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: APK erstellen
+    runs-on: ubuntu-latest
+
+    steps:
+
+      # 1. Repository laden
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+
+      # 2. Node.js installieren
+      - name: Node.js einrichten
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      # 3. Java für Android einrichten
+      - name: Java einrichten
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      # 4. Android SDK einrichten
+      - name: Android SDK einrichten
+        uses: android-actions/setup-android@v3
+
+      # 5. Web-App als Capacitor-Projekt vorbereiten
+      - name: Capacitor vorbereiten
+        run: |
+          mkdir -p web
+          cp -r extracted/. web/
+
+          cat > package.json <<'EOF'
+          {
+            "name": "auto-check",
+            "version": "1.0.0",
+            "private": true,
+            "scripts": {
+              "build": "echo Web-App ist bereits gebaut"
+            },
+            "dependencies": {
+              "@capacitor/core": "latest"
+            },
+            "devDependencies": {
+              "@capacitor/cli": "latest"
+            }
+          }
+          EOF
+
+          cat > capacitor.config.json <<'EOF'
+          {
+            "appId": "com.evilsmile1982.autocheck",
+            "appName": "Auto Check",
+            "webDir": "web",
+            "bundledWebRuntime": false
+          }
+          EOF
+
+      # 6. Abhängigkeiten installieren
+      - name: NPM installieren
+        run: npm install
+
+      # 7. Android-Projekt erstellen
+      - name: Android-Projekt erstellen
+        run: npx cap add android
+
+      # 8. Web-Dateien in Android kopieren
+      - name: Web-App synchronisieren
+        run: npx cap sync android
+
+      # 9. Debug APK bauen
+      - name: APK bauen
+        working-directory: android
+        run: |
+          chmod +x gradlew
+          ./gradlew assembleDebug
+
+      # 10. APK als Download bereitstellen
+      - name: APK hochladen
+        uses: actions/upload-artifact@v4
+        with:
+          name: Auto-Check-APK
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
