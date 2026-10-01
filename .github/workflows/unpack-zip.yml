@@ -1,0 +1,30 @@
+name: Unpack Android ZIP
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  unpack:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+
+      - name: ZIP entpacken
+        run: |
+          rm -rf extracted
+          mkdir -p extracted
+          unzip -o Auto_Check_GitHub_Android.zip -d extracted
+
+      - name: Dateien speichern
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add extracted
+          git diff --cached --quiet && exit 0
+          git commit -m "ZIP entpackt"
+          git push
