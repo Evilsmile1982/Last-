@@ -1,103 +1,168 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
 
   <meta
     name="viewport"
-    content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
   >
 
   <meta name="theme-color" content="#05070a">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
 
-  <title>Auto Check</title>
+  <title>AUTO CHECK</title>
 
-  <link rel="icon" type="image/png" href="assets/icon-192.png">
-  <link rel="apple-touch-icon" href="assets/icon-192.png">
+  <!-- BILD 2 als App-/Browser-Icon -->
+  <link rel="icon" type="image/png" href="assets/app-icon.png">
+  <link rel="apple-touch-icon" href="assets/app-icon.png">
 
-  <link rel="manifest" href="manifest.webmanifest">
   <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
 
-<main class="app">
+<div class="app">
 
-  <!-- ==========================================
+  <!-- =====================================================
        HERO
-       ========================================== -->
+       ===================================================== -->
 
   <section class="hero">
 
+    <!-- Hauptbild -->
     <img
-      class="hero-image"
       src="assets/hero.jpg"
+      class="hero-background"
       alt="Auto Check"
     >
 
-    <div class="hero-dark"></div>
+    <div class="hero-overlay"></div>
 
-    <!-- LOGO -->
-    <div class="logo-container">
+    <!-- AUTO CHECK LOGO -->
+    <div class="hero-logo">
       <img
-        class="main-logo"
         src="assets/logo-overlay.png"
-        alt="Auto Check Logo"
+        alt="AUTO CHECK"
       >
     </div>
 
   </section>
 
 
-  <!-- ==========================================
+  <!-- =====================================================
        HAUPTMENÜ
-       ========================================== -->
+       ===================================================== -->
 
-  <section class="dashboard">
+  <main class="menu">
 
 
-    <!-- ================= MEIN AUTO ================= -->
+    <!-- ===================================================
+         OBEN LINKS
+         fährt von RECHTS
+         =================================================== -->
 
     <button
-      class="card card-red slide-left"
-      data-target="my-car"
+      class="menu-card card-red top-card"
+      data-menu="auto"
     >
 
-      <div class="icon red-icon">
+      <div class="card-icon">
 
-        <svg viewBox="0 0 64 64">
+        <!-- Auto Icon -->
+        <svg viewBox="0 0 100 100">
           <path
-            d="M14 35l5-15c1-3 3-5 7-5h12c4 0 6 2 7 5l5 15"
+            d="M20 53
+               L27 32
+               Q29 26 36 26
+               H64
+               Q71 26 73 32
+               L80 53"
             fill="none"
             stroke="currentColor"
-            stroke-width="4"
+            stroke-width="6"
             stroke-linecap="round"
           />
 
           <rect
-            x="10"
-            y="34"
-            width="44"
-            height="15"
-            rx="4"
+            x="15"
+            y="50"
+            width="70"
+            height="27"
+            rx="8"
             fill="none"
             stroke="currentColor"
-            stroke-width="4"
+            stroke-width="6"
           />
 
           <circle
-            cx="20"
-            cy="50"
-            r="4"
+            cx="29"
+            cy="78"
+            r="7"
             fill="currentColor"
           />
 
           <circle
-            cx="44"
-            cy="50"
-            r="4"
+            cx="71"
+            cy="78"
+            r="7"
+            fill="currentColor"
+          />
+
+          <path
+            d="M30 43H70"
+            stroke="currentColor"
+            stroke-width="5"
+            stroke-linecap="round"
+          />
+        </svg>
+
+      </div>
+
+      <div class="card-text">
+
+        <strong>Mein Auto</strong>
+
+        <span>
+          Fahrzeug &amp; Details
+        </span>
+
+      </div>
+
+      <div class="card-arrow">›</div>
+
+    </button>
+
+
+    <!-- ===================================================
+         OBEN MITTE
+         fährt von RECHTS
+         =================================================== -->
+
+    <button
+      class="menu-card card-blue top-card"
+      data-menu="repairs"
+    >
+
+      <div class="card-icon">
+
+        <!-- Schraubenschlüssel -->
+        <svg viewBox="0 0 100 100">
+
+          <path
+            d="M62 17
+               C52 17 44 25 44 35
+               C44 39 45 42 48 45
+               L20 73
+               C16 77 16 84 20 88
+               C24 92 31 92 35 88
+               L63 60
+               C66 63 70 64 74 64
+               C84 64 92 56 92 46
+               C92 43 91 39 90 36
+               L76 43
+               L66 33
+               L73 19
+               C69 18 66 17 62 17Z"
             fill="currentColor"
           />
 
@@ -105,135 +170,66 @@
 
       </div>
 
-      <div class="card-title">
-        Mein Auto
+      <div class="card-text">
+
+        <strong>Reparaturen</strong>
+
+        <span>
+          Reparaturen verwalten
+        </span>
+
       </div>
 
-      <div class="card-subtitle">
-        Fahrzeug &amp; Details
-      </div>
-
-      <div class="arrow">
-        ›
-      </div>
+      <div class="card-arrow">›</div>
 
     </button>
 
 
-    <!-- ================= REPARATUREN ================= -->
+    <!-- ===================================================
+         OBEN RECHTS
+         fährt von RECHTS
+         =================================================== -->
 
     <button
-      class="card card-blue slide-right"
-      data-target="repairs"
+      class="menu-card card-green top-card"
+      data-menu="inspection"
     >
 
-      <div class="icon blue-icon">
+      <div class="card-icon">
 
-        <svg viewBox="0 0 64 64">
-
-          <path
-            d="M39 12c-6 0-11 4-13 9l7 7-18 18c-3 3-3 7 0 10s7 3 10 0l18-18 7 7c5-2 9-7 9-13 0-2 0-4-1-6l-11 5-7-7 5-11c-2-1-4-1-6-1z"
-            fill="currentColor"
-          />
-
-        </svg>
-
-      </div>
-
-      <div class="card-title">
-        Reparaturen
-      </div>
-
-      <div class="card-subtitle">
-        Reparaturen verwalten
-      </div>
-
-      <div class="arrow">
-        ›
-      </div>
-
-    </button>
-
-
-    <!-- ================= PICKERL ================= -->
-
-    <button
-      class="card card-green slide-left"
-      data-target="inspection"
-    >
-
-      <div class="icon green-icon">
-
-        <svg viewBox="0 0 64 64">
+        <!-- Uhr / Pickerl -->
+        <svg viewBox="0 0 100 100">
 
           <circle
-            cx="32"
-            cy="32"
-            r="23"
+            cx="50"
+            cy="50"
+            r="34"
             fill="none"
             stroke="currentColor"
-            stroke-width="4"
+            stroke-width="6"
           />
 
           <circle
-            cx="32"
-            cy="32"
-            r="3"
+            cx="50"
+            cy="50"
+            r="5"
             fill="currentColor"
           />
 
           <path
-            d="M32 13v19l12 8"
+            d="M50 24V50L68 61"
             fill="none"
             stroke="currentColor"
-            stroke-width="4"
+            stroke-width="6"
             stroke-linecap="round"
           />
 
           <path
-            d="M32 7v6M32 51v6M7 32h6M51 32h6"
-            stroke="currentColor"
-            stroke-width="3"
-            stroke-linecap="round"
-          />
-
-        </svg>
-
-      </div>
-
-      <div class="card-title">
-        Pickerl/TÜV
-      </div>
-
-      <div class="card-subtitle">
-        Termine &amp; Fristen
-      </div>
-
-      <div class="arrow">
-        ›
-      </div>
-
-    </button>
-
-
-    <!-- ================= WARTUNGEN ================= -->
-
-    <button
-      class="card card-orange slide-right"
-      data-target="maintenance"
-    >
-
-      <div class="icon orange-icon">
-
-        <svg viewBox="0 0 64 64">
-
-          <path
-            d="M38 11c-7 1-12 7-12 14 0 3 1 6 3 8L12 50l6 6 17-17c2 2 5 3 8 3 7 0 13-5 14-12l-11 5-8-8 5-11z"
-            fill="currentColor"
-          />
-
-          <path
-            d="M14 14l36 36"
+            d="M50 8V18
+               M50 82V92
+               M8 50H18
+               M82 50H92"
+            fill="none"
             stroke="currentColor"
             stroke-width="5"
             stroke-linecap="round"
@@ -243,47 +239,57 @@
 
       </div>
 
-      <div class="card-title">
-        Wartungen
+      <div class="card-text">
+
+        <strong>Pickerl/TÜV</strong>
+
+        <span>
+          Termine &amp; Fristen
+        </span>
+
       </div>
 
-      <div class="card-subtitle">
-        Verschiedenes
-      </div>
-
-      <div class="arrow">
-        ›
-      </div>
+      <div class="card-arrow">›</div>
 
     </button>
 
 
-    <!-- ================= GESAMTBLICK ================= -->
+    <!-- ===================================================
+         UNTEN LINKS
+         fährt von LINKS
+         =================================================== -->
 
     <button
-      class="card card-purple slide-left"
-      data-target="overview"
+      class="menu-card card-orange bottom-card"
+      data-menu="maintenance"
     >
 
-      <div class="icon purple-icon">
+      <div class="card-icon">
 
-        <svg viewBox="0 0 64 64">
+        <!-- Werkzeug -->
+        <svg viewBox="0 0 100 100">
 
-          <rect
-            x="16"
-            y="8"
-            width="32"
-            height="48"
-            rx="4"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="4"
+          <path
+            d="M59 17
+               C50 18 43 26 43 35
+               C43 39 45 43 48 46
+               L19 75
+               C15 79 15 85 19 89
+               C23 93 29 93 33 89
+               L62 60
+               C65 63 69 65 74 65
+               C83 65 91 58 92 49
+               L77 56
+               L66 45
+               L73 30
+               C69 22 64 18 59 17Z"
+            fill="currentColor"
           />
 
           <path
-            d="M24 20h16M24 29h16M24 38h12M24 47h9"
+            d="M18 20L80 82"
             stroke="currentColor"
-            stroke-width="4"
+            stroke-width="9"
             stroke-linecap="round"
           />
 
@@ -291,53 +297,122 @@
 
       </div>
 
-      <div class="card-title">
-        Gesamtblick
+      <div class="card-text">
+
+        <strong>Wartungen</strong>
+
+        <span>
+          Verschiedenes
+        </span>
+
       </div>
 
-      <div class="card-subtitle">
-        Die wichtigsten Infos
-      </div>
-
-      <div class="arrow">
-        ›
-      </div>
+      <div class="card-arrow">›</div>
 
     </button>
 
 
-    <!-- ================= REIFEN ================= -->
+    <!-- ===================================================
+         UNTEN MITTE
+         fährt von LINKS
+         =================================================== -->
 
     <button
-      class="card card-teal slide-right"
-      data-target="tires"
+      class="menu-card card-purple bottom-card"
+      data-menu="overview"
     >
 
-      <div class="icon teal-icon">
+      <div class="card-icon">
 
-        <svg viewBox="0 0 64 64">
+        <!-- Dokument -->
+        <svg viewBox="0 0 100 100">
 
-          <path
-            d="M24 9c-7 4-10 13-10 23s3 19 10 23h16c7-4 10-13 10-23S47 13 40 9z"
+          <rect
+            x="27"
+            y="13"
+            width="46"
+            height="74"
+            rx="6"
             fill="none"
             stroke="currentColor"
-            stroke-width="4"
+            stroke-width="6"
+          />
+
+          <path
+            d="M38 32H62
+               M38 45H62
+               M38 58H58
+               M38 71H53"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="6"
+            stroke-linecap="round"
+          />
+
+        </svg>
+
+      </div>
+
+      <div class="card-text">
+
+        <strong>Gesamtblick</strong>
+
+        <span>
+          Die wichtigsten Infos
+        </span>
+
+      </div>
+
+      <div class="card-arrow">›</div>
+
+    </button>
+
+
+    <!-- ===================================================
+         UNTEN RECHTS
+         fährt von LINKS
+         =================================================== -->
+
+    <button
+      class="menu-card card-teal bottom-card"
+      data-menu="tires"
+    >
+
+      <div class="card-icon">
+
+        <!-- Reifen -->
+        <svg viewBox="0 0 100 100">
+
+          <path
+            d="M34 13
+               C24 19 19 33 19 50
+               C19 67 24 81 34 87
+               H66
+               C76 81 81 67 81 50
+               C81 33 76 19 66 13Z"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="6"
           />
 
           <ellipse
-            cx="32"
-            cy="32"
-            rx="8"
-            ry="22"
+            cx="50"
+            cy="50"
+            rx="13"
+            ry="31"
             fill="none"
             stroke="currentColor"
-            stroke-width="3"
+            stroke-width="5"
           />
 
           <path
-            d="M24 16h16M23 24h18M23 40h18M24 48h16"
+            d="M35 27H65
+               M32 39H68
+               M32 61H68
+               M35 73H65"
+            fill="none"
             stroke="currentColor"
-            stroke-width="3"
+            stroke-width="4"
             stroke-linecap="round"
           />
 
@@ -345,36 +420,66 @@
 
       </div>
 
-      <div class="card-title">
-        Reifen
+      <div class="card-text">
+
+        <strong>Reifen</strong>
+
+        <span>
+          Größen, Dimensionen<br>
+          und Alter
+        </span>
+
       </div>
 
-      <div class="card-subtitle">
-        Größen, Dimensionen<br>
-        und Alter
-      </div>
-
-      <div class="arrow">
-        ›
-      </div>
+      <div class="card-arrow">›</div>
 
     </button>
 
+  </main>
+
+
+  <!-- =====================================================
+       UNTERMENÜ
+       ===================================================== -->
+
+  <section
+    id="submenu"
+    class="submenu"
+    aria-hidden="true"
+  >
+
+    <div class="submenu-box">
+
+      <button
+        id="closeSubmenu"
+        class="submenu-close"
+      >
+        ×
+      </button>
+
+      <div
+        id="submenuIcon"
+        class="submenu-icon"
+      ></div>
+
+      <h2 id="submenuTitle">
+        Auto
+      </h2>
+
+      <p id="submenuDescription">
+        Auswahl
+      </p>
+
+      <div
+        id="submenuOptions"
+        class="submenu-options"
+      ></div>
+
+    </div>
+
   </section>
 
-
-  <div class="slogan">
-    Verliere nicht die Übersicht
-  </div>
-
-</main>
-
-
-<div
-  class="toast"
-  role="status"
-  aria-live="polite"
-></div>
+</div>
 
 
 <script src="app.js"></script>
