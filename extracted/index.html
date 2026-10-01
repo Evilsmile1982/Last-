@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+  <meta name="theme-color" content="#07090d">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Auto Check">
+  <meta name="description" content="Auto Check – Fahrzeug, Reparaturen, Pickerl/TÜV, Wartungen, Gesamtblick und Reifen.">
+  <title>Auto Check</title>
+  <link rel="icon" type="image/png" href="assets/icon-192.png">
+  <link rel="apple-touch-icon" href="assets/icon-192.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <section class="hero" aria-label="Auto Check Startseite">
+      <img class="hero-image" src="assets/hero.jpg" alt="Sportwagen in einer modernen Werkstatt">
+      <div class="hero-vignette"></div>
+      <div class="hero-glow"></div>
+
+      <div class="logo-wrap">
+        <img class="logo" src="assets/logo-overlay.png" alt="Auto Check Logo">
+      </div>
+
+      <div class="hero-title">
+        <span>AUTO</span><strong>CHECK</strong>
+      </div>
+    </section>
+
+    <section class="dashboard" aria-label="Hauptmenü">
+      <button class="menu-card from-left accent" data-target="my-car">
+        <span class="icon-ring">🚘</span>
+        <span class="copy"><b>Mein Auto</b><small>Fahrzeug &amp; Details</small></span>
+        <span class="arrow">›</span>
+      </button>
+
+      <button class="menu-card from-right" data-target="repairs">
+        <span class="icon-ring blue">🔧</span>
+        <span class="copy"><b>Reparaturen</b><small>Reparaturen verwalten</small></span>
+        <span class="arrow">›</span>
+      </button>
+
+      <button class="menu-card from-left" data-target="inspection">
+        <span class="icon-ring green">◷</span>
+        <span class="copy"><b>Pickerl/TÜV</b><small>Termine &amp; Fristen</small></span>
+        <span class="arrow">›</span>
+      </button>
+
+      <button class="menu-card from-right" data-target="maintenance">
+        <span class="icon-ring orange">🛠</span>
+        <span class="copy"><b>Wartungen</b><small>Verschiedenes</small></span>
+        <span class="arrow">›</span>
+      </button>
+
+      <button class="menu-card from-left" data-target="overview">
+        <span class="icon-ring purple">▤</span>
+        <span class="copy"><b>Gesamtblick</b><small>Die wichtigsten Infos</small></span>
+        <span class="arrow">›</span>
+      </button>
+
+      <button class="menu-card from-right" data-target="tires">
+        <span class="icon-ring teal">◉</span>
+        <span class="copy"><b>Reifen</b><small>Größen, Dimensionen und Alter</small></span>
+        <span class="arrow">›</span>
+      </button>
+    </section>
+
+    <p class="slogan">Verliere nicht die Übersicht</p>
+  </main>
+
+  <div class="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
