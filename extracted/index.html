@@ -5,484 +5,1012 @@
 
   <meta
     name="viewport"
-    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
   >
 
-  <meta name="theme-color" content="#05070a">
+  <meta
+    name="theme-color"
+    content="#05070a"
+  >
+
+  <meta
+    name="description"
+    content="AUTO CHECK – Fahrzeugverwaltung, Reparaturen, TÜV, Wartungen, Gesamtblick und Reifen."
+  >
 
   <title>AUTO CHECK</title>
 
-  <!-- BILD 2 als App-/Browser-Icon -->
-  <link rel="icon" type="image/png" href="assets/app-icon.png">
-  <link rel="apple-touch-icon" href="assets/app-icon.png">
+  <!-- App Icon -->
+  <link
+    rel="icon"
+    type="image/jpeg"
+    href="assets/icon.jpg"
+  >
 
-  <link rel="stylesheet" href="styles.css">
+  <link
+    rel="apple-touch-icon"
+    href="assets/icon.jpg"
+  >
+
+  <!-- PWA -->
+  <link
+    rel="manifest"
+    href="manifest.json"
+  >
+
+  <!-- Styles -->
+  <link
+    rel="stylesheet"
+    href="styles.css"
+  >
 </head>
 
 <body>
 
-<div class="app">
+  <!-- =========================================================
+       APP
+  ========================================================== -->
 
-  <!-- =====================================================
-       HERO
-       ===================================================== -->
+  <main class="app">
 
-  <section class="hero">
+    <!-- =======================================================
+         HERO-BEREICH
+    ======================================================== -->
 
-    <!-- Hauptbild -->
-    <img
-      src="assets/hero.jpg"
-      class="hero-background"
-      alt="Auto Check"
-    >
+    <section class="hero">
 
-    <div class="hero-overlay"></div>
-
-    <!-- AUTO CHECK LOGO -->
-    <div class="hero-logo">
+      <!-- Hintergrundbild -->
       <img
-        src="assets/logo-overlay.png"
-        alt="AUTO CHECK"
+        class="hero-background"
+        src="assets/hero.jpg"
+        alt="AUTO CHECK Fahrzeug"
       >
+
+      <!-- dunkle Überlagerung -->
+      <div class="hero-overlay"></div>
+
+      <!-- Logo -->
+      <div class="logo-container">
+
+        <img
+          class="logo"
+          src="assets/logo-overlay.png"
+          alt="AUTO CHECK"
+        >
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         HAUPTBUTTONS
+    ======================================================== -->
+
+    <section
+      class="menu"
+      aria-label="AUTO CHECK Menü"
+    >
+
+      <!-- =====================================================
+           OBERE REIHE
+           kommt von rechts
+      ====================================================== -->
+
+      <div class="menu-row top-row">
+
+        <!-- MEIN AUTO -->
+        <button
+          class="menu-card card-red slide-right"
+          type="button"
+          data-menu="auto"
+          aria-label="Mein Auto öffnen"
+        >
+
+          <div class="card-icon">
+
+            <!-- Auto Icon -->
+            <svg
+              viewBox="0 0 100 100"
+              aria-hidden="true"
+            >
+              <path
+                d="M20 55 L27 35 Q30 27 39 27 H61 Q70 27 73 35 L80 55"
+              />
+
+              <rect
+                x="15"
+                y="48"
+                width="70"
+                height="30"
+                rx="8"
+              />
+
+              <circle
+                cx="30"
+                cy="76"
+                r="7"
+              />
+
+              <circle
+                cx="70"
+                cy="76"
+                r="7"
+              />
+
+              <path
+                d="M32 43 H68"
+              />
+
+            </svg>
+
+          </div>
+
+          <div class="card-content">
+
+            <h2>Mein Auto</h2>
+
+            <p>
+              Fahrzeug &amp; Details
+            </p>
+
+          </div>
+
+          <span class="arrow">
+            ›
+          </span>
+
+        </button>
+
+
+        <!-- REPARATUREN -->
+        <button
+          class="menu-card card-blue slide-right"
+          type="button"
+          data-menu="repair"
+          aria-label="Reparaturen öffnen"
+        >
+
+          <div class="card-icon">
+
+            <svg
+              viewBox="0 0 100 100"
+              aria-hidden="true"
+            >
+              <path
+                d="M72 25
+                   A25 25 0 0 0 42 53
+                   L20 75
+                   A8 8 0 0 0 31 86
+                   L53 64
+                   A25 25 0 0 0 80 35
+                   L64 45
+                   L55 36
+                   Z"
+              />
+
+            </svg>
+
+          </div>
+
+          <div class="card-content">
+
+            <h2>Reparaturen</h2>
+
+            <p>
+              Reparaturen verwalten
+            </p>
+
+          </div>
+
+          <span class="arrow">
+            ›
+          </span>
+
+        </button>
+
+
+        <!-- PICKERL / TÜV -->
+        <button
+          class="menu-card card-green slide-right"
+          type="button"
+          data-menu="inspection"
+          aria-label="Pickerl und TÜV öffnen"
+        >
+
+          <div class="card-icon">
+
+            <svg
+              viewBox="0 0 100 100"
+              aria-hidden="true"
+            >
+
+              <circle
+                cx="50"
+                cy="50"
+                r="32"
+              />
+
+              <circle
+                cx="50"
+                cy="50"
+                r="25"
+              />
+
+              <path
+                d="M50 50 L50 30"
+              />
+
+              <path
+                d="M50 50 L65 58"
+              />
+
+              <path
+                d="M50 18 V25"
+              />
+
+              <path
+                d="M50 75 V82"
+              />
+
+              <path
+                d="M18 50 H25"
+              />
+
+              <path
+                d="M75 50 H82"
+              />
+
+            </svg>
+
+          </div>
+
+          <div class="card-content">
+
+            <h2>Pickerl/TÜV</h2>
+
+            <p>
+              Termine &amp; Fristen
+            </p>
+
+          </div>
+
+          <span class="arrow">
+            ›
+          </span>
+
+        </button>
+
+      </div>
+
+
+      <!-- =====================================================
+           UNTERE REIHE
+           kommt von links
+      ====================================================== -->
+
+      <div class="menu-row bottom-row">
+
+        <!-- WARTUNGEN -->
+        <button
+          class="menu-card card-orange slide-left"
+          type="button"
+          data-menu="maintenance"
+          aria-label="Wartungen öffnen"
+        >
+
+          <div class="card-icon">
+
+            <svg
+              viewBox="0 0 100 100"
+              aria-hidden="true"
+            >
+
+              <path
+                d="M25 22 L78 75"
+              />
+
+              <path
+                d="M73 20
+                   A17 17 0 0 0 53 40
+                   L65 52
+                   L80 37
+                   L68 25
+                   Z"
+              />
+
+              <path
+                d="M27 60
+                   L42 75
+                   L29 88
+                   L14 73
+                   Z"
+              />
+
+              <circle
+                cx="28"
+                cy="72"
+                r="5"
+              />
+
+            </svg>
+
+          </div>
+
+          <div class="card-content">
+
+            <h2>Wartungen</h2>
+
+            <p>
+              Verschiedenes
+            </p>
+
+          </div>
+
+          <span class="arrow">
+            ›
+          </span>
+
+        </button>
+
+
+        <!-- GESAMTBLICK -->
+        <button
+          class="menu-card card-purple slide-left"
+          type="button"
+          data-menu="overview"
+          aria-label="Gesamtblick öffnen"
+        >
+
+          <div class="card-icon">
+
+            <svg
+              viewBox="0 0 100 100"
+              aria-hidden="true"
+            >
+
+              <rect
+                x="25"
+                y="15"
+                width="50"
+                height="70"
+                rx="5"
+              />
+
+              <path
+                d="M35 32 H65"
+              />
+
+              <path
+                d="M35 45 H65"
+              />
+
+              <path
+                d="M35 58 H58"
+              />
+
+              <path
+                d="M35 71 H52"
+              />
+
+            </svg>
+
+          </div>
+
+          <div class="card-content">
+
+            <h2>Gesamtblick</h2>
+
+            <p>
+              Die wichtigsten Infos
+            </p>
+
+          </div>
+
+          <span class="arrow">
+            ›
+          </span>
+
+        </button>
+
+
+        <!-- REIFEN -->
+        <button
+          class="menu-card card-cyan slide-left"
+          type="button"
+          data-menu="tires"
+          aria-label="Reifen öffnen"
+        >
+
+          <div class="card-icon">
+
+            <svg
+              viewBox="0 0 100 100"
+              aria-hidden="true"
+            >
+
+              <ellipse
+                cx="50"
+                cy="50"
+                rx="24"
+                ry="38"
+              />
+
+              <ellipse
+                cx="50"
+                cy="50"
+                rx="13"
+                ry="27"
+              />
+
+              <path
+                d="M38 24 L62 76"
+              />
+
+              <path
+                d="M62 24 L38 76"
+              />
+
+              <path
+                d="M28 39 L72 61"
+              />
+
+              <path
+                d="M72 39 L28 61"
+              />
+
+            </svg>
+
+          </div>
+
+          <div class="card-content">
+
+            <h2>Reifen</h2>
+
+            <p>
+              Größen, Dimensionen<br>
+              und Alter
+            </p>
+
+          </div>
+
+          <span class="arrow">
+            ›
+          </span>
+
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         UNTERMENÜ / MODAL
+    ======================================================== -->
+
+    <div
+      class="submenu-overlay"
+      id="submenuOverlay"
+      aria-hidden="true"
+    >
+
+      <section
+        class="submenu"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="submenuTitle"
+      >
+
+        <button
+          class="close-button"
+          id="closeSubmenu"
+          type="button"
+          aria-label="Menü schließen"
+        >
+          ×
+        </button>
+
+        <div class="submenu-header">
+
+          <div
+            class="submenu-icon"
+            id="submenuIcon"
+          >
+          </div>
+
+          <div>
+
+            <h2 id="submenuTitle">
+              Menü
+            </h2>
+
+            <p id="submenuDescription">
+              Auswahl
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <!-- ================================================
+             UNTERMENÜ-INHALT
+        ================================================= -->
+
+        <div
+          class="submenu-content"
+          id="submenuContent"
+        >
+
+        </div>
+
+      </section>
+
     </div>
-
-  </section>
-
-
-  <!-- =====================================================
-       HAUPTMENÜ
-       ===================================================== -->
-
-  <main class="menu">
-
-
-    <!-- ===================================================
-         OBEN LINKS
-         fährt von RECHTS
-         =================================================== -->
-
-    <button
-      class="menu-card card-red top-card"
-      data-menu="auto"
-    >
-
-      <div class="card-icon">
-
-        <!-- Auto Icon -->
-        <svg viewBox="0 0 100 100">
-          <path
-            d="M20 53
-               L27 32
-               Q29 26 36 26
-               H64
-               Q71 26 73 32
-               L80 53"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="6"
-            stroke-linecap="round"
-          />
-
-          <rect
-            x="15"
-            y="50"
-            width="70"
-            height="27"
-            rx="8"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="6"
-          />
-
-          <circle
-            cx="29"
-            cy="78"
-            r="7"
-            fill="currentColor"
-          />
-
-          <circle
-            cx="71"
-            cy="78"
-            r="7"
-            fill="currentColor"
-          />
-
-          <path
-            d="M30 43H70"
-            stroke="currentColor"
-            stroke-width="5"
-            stroke-linecap="round"
-          />
-        </svg>
-
-      </div>
-
-      <div class="card-text">
-
-        <strong>Mein Auto</strong>
-
-        <span>
-          Fahrzeug &amp; Details
-        </span>
-
-      </div>
-
-      <div class="card-arrow">›</div>
-
-    </button>
-
-
-    <!-- ===================================================
-         OBEN MITTE
-         fährt von RECHTS
-         =================================================== -->
-
-    <button
-      class="menu-card card-blue top-card"
-      data-menu="repairs"
-    >
-
-      <div class="card-icon">
-
-        <!-- Schraubenschlüssel -->
-        <svg viewBox="0 0 100 100">
-
-          <path
-            d="M62 17
-               C52 17 44 25 44 35
-               C44 39 45 42 48 45
-               L20 73
-               C16 77 16 84 20 88
-               C24 92 31 92 35 88
-               L63 60
-               C66 63 70 64 74 64
-               C84 64 92 56 92 46
-               C92 43 91 39 90 36
-               L76 43
-               L66 33
-               L73 19
-               C69 18 66 17 62 17Z"
-            fill="currentColor"
-          />
-
-        </svg>
-
-      </div>
-
-      <div class="card-text">
-
-        <strong>Reparaturen</strong>
-
-        <span>
-          Reparaturen verwalten
-        </span>
-
-      </div>
-
-      <div class="card-arrow">›</div>
-
-    </button>
-
-
-    <!-- ===================================================
-         OBEN RECHTS
-         fährt von RECHTS
-         =================================================== -->
-
-    <button
-      class="menu-card card-green top-card"
-      data-menu="inspection"
-    >
-
-      <div class="card-icon">
-
-        <!-- Uhr / Pickerl -->
-        <svg viewBox="0 0 100 100">
-
-          <circle
-            cx="50"
-            cy="50"
-            r="34"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="6"
-          />
-
-          <circle
-            cx="50"
-            cy="50"
-            r="5"
-            fill="currentColor"
-          />
-
-          <path
-            d="M50 24V50L68 61"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="6"
-            stroke-linecap="round"
-          />
-
-          <path
-            d="M50 8V18
-               M50 82V92
-               M8 50H18
-               M82 50H92"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="5"
-            stroke-linecap="round"
-          />
-
-        </svg>
-
-      </div>
-
-      <div class="card-text">
-
-        <strong>Pickerl/TÜV</strong>
-
-        <span>
-          Termine &amp; Fristen
-        </span>
-
-      </div>
-
-      <div class="card-arrow">›</div>
-
-    </button>
-
-
-    <!-- ===================================================
-         UNTEN LINKS
-         fährt von LINKS
-         =================================================== -->
-
-    <button
-      class="menu-card card-orange bottom-card"
-      data-menu="maintenance"
-    >
-
-      <div class="card-icon">
-
-        <!-- Werkzeug -->
-        <svg viewBox="0 0 100 100">
-
-          <path
-            d="M59 17
-               C50 18 43 26 43 35
-               C43 39 45 43 48 46
-               L19 75
-               C15 79 15 85 19 89
-               C23 93 29 93 33 89
-               L62 60
-               C65 63 69 65 74 65
-               C83 65 91 58 92 49
-               L77 56
-               L66 45
-               L73 30
-               C69 22 64 18 59 17Z"
-            fill="currentColor"
-          />
-
-          <path
-            d="M18 20L80 82"
-            stroke="currentColor"
-            stroke-width="9"
-            stroke-linecap="round"
-          />
-
-        </svg>
-
-      </div>
-
-      <div class="card-text">
-
-        <strong>Wartungen</strong>
-
-        <span>
-          Verschiedenes
-        </span>
-
-      </div>
-
-      <div class="card-arrow">›</div>
-
-    </button>
-
-
-    <!-- ===================================================
-         UNTEN MITTE
-         fährt von LINKS
-         =================================================== -->
-
-    <button
-      class="menu-card card-purple bottom-card"
-      data-menu="overview"
-    >
-
-      <div class="card-icon">
-
-        <!-- Dokument -->
-        <svg viewBox="0 0 100 100">
-
-          <rect
-            x="27"
-            y="13"
-            width="46"
-            height="74"
-            rx="6"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="6"
-          />
-
-          <path
-            d="M38 32H62
-               M38 45H62
-               M38 58H58
-               M38 71H53"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="6"
-            stroke-linecap="round"
-          />
-
-        </svg>
-
-      </div>
-
-      <div class="card-text">
-
-        <strong>Gesamtblick</strong>
-
-        <span>
-          Die wichtigsten Infos
-        </span>
-
-      </div>
-
-      <div class="card-arrow">›</div>
-
-    </button>
-
-
-    <!-- ===================================================
-         UNTEN RECHTS
-         fährt von LINKS
-         =================================================== -->
-
-    <button
-      class="menu-card card-teal bottom-card"
-      data-menu="tires"
-    >
-
-      <div class="card-icon">
-
-        <!-- Reifen -->
-        <svg viewBox="0 0 100 100">
-
-          <path
-            d="M34 13
-               C24 19 19 33 19 50
-               C19 67 24 81 34 87
-               H66
-               C76 81 81 67 81 50
-               C81 33 76 19 66 13Z"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="6"
-          />
-
-          <ellipse
-            cx="50"
-            cy="50"
-            rx="13"
-            ry="31"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="5"
-          />
-
-          <path
-            d="M35 27H65
-               M32 39H68
-               M32 61H68
-               M35 73H65"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="4"
-            stroke-linecap="round"
-          />
-
-        </svg>
-
-      </div>
-
-      <div class="card-text">
-
-        <strong>Reifen</strong>
-
-        <span>
-          Größen, Dimensionen<br>
-          und Alter
-        </span>
-
-      </div>
-
-      <div class="card-arrow">›</div>
-
-    </button>
 
   </main>
 
 
-  <!-- =====================================================
-       UNTERMENÜ
-       ===================================================== -->
+  <!-- =========================================================
+       JAVASCRIPT
+  ========================================================== -->
 
-  <section
-    id="submenu"
-    class="submenu"
-    aria-hidden="true"
-  >
+  <script>
 
-    <div class="submenu-box">
+    document.addEventListener(
+      "DOMContentLoaded",
+      function () {
 
-      <button
-        id="closeSubmenu"
-        class="submenu-close"
-      >
-        ×
-      </button>
+        const overlay =
+          document.getElementById(
+            "submenuOverlay"
+          );
 
-      <div
-        id="submenuIcon"
-        class="submenu-icon"
-      ></div>
+        const closeButton =
+          document.getElementById(
+            "closeSubmenu"
+          );
 
-      <h2 id="submenuTitle">
-        Auto
-      </h2>
+        const title =
+          document.getElementById(
+            "submenuTitle"
+          );
 
-      <p id="submenuDescription">
-        Auswahl
-      </p>
+        const description =
+          document.getElementById(
+            "submenuDescription"
+          );
 
-      <div
-        id="submenuOptions"
-        class="submenu-options"
-      ></div>
+        const content =
+          document.getElementById(
+            "submenuContent"
+          );
 
-    </div>
-
-  </section>
-
-</div>
+        const icon =
+          document.getElementById(
+            "submenuIcon"
+          );
 
 
-<script src="app.js"></script>
+        /*
+         * Daten für die sechs Hauptbereiche
+         */
+
+        const menus = {
+
+          auto: {
+
+            title: "Mein Auto",
+
+            description:
+              "Fahrzeug & Details",
+
+            icon: "🚗",
+
+            items: [
+
+              {
+                title: "Fahrzeugdaten",
+                text:
+                  "Marke, Modell, Baujahr und Fahrzeugdaten verwalten."
+              },
+
+              {
+                title: "Kilometerstand",
+                text:
+                  "Aktuellen Kilometerstand eintragen."
+              },
+
+              {
+                title: "Fahrzeugdokumente",
+                text:
+                  "Wichtige Dokumente und Informationen."
+              }
+
+            ]
+
+          },
+
+
+          repair: {
+
+            title: "Reparaturen",
+
+            description:
+              "Reparaturen verwalten",
+
+            icon: "🔧",
+
+            items: [
+
+              {
+                title: "Neue Reparatur",
+                text:
+                  "Eine neue Reparatur hinzufügen."
+              },
+
+              {
+                title: "Reparaturhistorie",
+                text:
+                  "Bereits durchgeführte Reparaturen anzeigen."
+              },
+
+              {
+                title: "Offene Reparaturen",
+                text:
+                  "Noch nicht erledigte Reparaturen."
+              }
+
+            ]
+
+          },
+
+
+          inspection: {
+
+            title: "Pickerl/TÜV",
+
+            description:
+              "Termine & Fristen",
+
+            icon: "⏱",
+
+            items: [
+
+              {
+                title: "Nächster Termin",
+                text:
+                  "Termin für Pickerl/TÜV eintragen."
+              },
+
+              {
+                title: "Fristen",
+                text:
+                  "Wichtige Fristen im Überblick."
+              },
+
+              {
+                title: "Erinnerungen",
+                text:
+                  "Erinnerungen für kommende Termine."
+              }
+
+            ]
+
+          },
+
+
+          maintenance: {
+
+            title: "Wartungen",
+
+            description:
+              "Wartungen verwalten",
+
+            icon: "🛠",
+
+            items: [
+
+              {
+                title: "Ölwechsel",
+                text:
+                  "Ölwechsel und nächste Fälligkeit verwalten."
+              },
+
+              {
+                title: "Inspektion",
+                text:
+                  "Wartungsintervalle verwalten."
+              },
+
+              {
+                title: "Weitere Wartungen",
+                text:
+                  "Weitere Wartungsarbeiten hinzufügen."
+              }
+
+            ]
+
+          },
+
+
+          overview: {
+
+            title: "Gesamtblick",
+
+            description:
+              "Die wichtigsten Infos",
+
+            icon: "📋",
+
+            items: [
+
+              {
+                title: "Fahrzeugübersicht",
+                text:
+                  "Alle wichtigen Fahrzeugdaten auf einen Blick."
+              },
+
+              {
+                title: "Nächste Termine",
+                text:
+                  "Anstehende Wartungen und Prüfungen."
+              },
+
+              {
+                title: "Kosten",
+                text:
+                  "Übersicht über Reparatur- und Wartungskosten."
+              }
+
+            ]
+
+          },
+
+
+          tires: {
+
+            title: "Reifen",
+
+            description:
+              "Größen, Dimensionen und Alter",
+
+            icon: "🛞",
+
+            items: [
+
+              {
+                title: "Reifendaten",
+                text:
+                  "Reifengröße und Dimensionen verwalten."
+              },
+
+              {
+                title: "Sommerreifen",
+                text:
+                  "Sommerreifen verwalten."
+              },
+
+              {
+                title: "Winterreifen",
+                text:
+                  "Winterreifen verwalten."
+              }
+
+            ]
+
+          }
+
+        };
+
+
+        /*
+         * Hauptbuttons
+         */
+
+        const buttons =
+          document.querySelectorAll(
+            ".menu-card"
+          );
+
+
+        buttons.forEach(
+          function (button) {
+
+            button.addEventListener(
+              "click",
+              function () {
+
+                const menuName =
+                  button.dataset.menu;
+
+                openMenu(
+                  menuName
+                );
+
+              }
+            );
+
+          }
+        );
+
+
+        /*
+         * Untermenü öffnen
+         */
+
+        function openMenu(
+          menuName
+        ) {
+
+          const menu =
+            menus[menuName];
+
+          if (!menu) {
+            return;
+          }
+
+
+          title.textContent =
+            menu.title;
+
+          description.textContent =
+            menu.description;
+
+          icon.textContent =
+            menu.icon;
+
+
+          content.innerHTML =
+            "";
+
+
+          menu.items.forEach(
+            function (item) {
+
+              const itemButton =
+                document.createElement(
+                  "button"
+                );
+
+              itemButton.className =
+                "submenu-item";
+
+              itemButton.type =
+                "button";
+
+              itemButton.innerHTML =
+
+                `
+                  <span class="submenu-item-text">
+
+                    <strong>
+                      ${item.title}
+                    </strong>
+
+                    <small>
+                      ${item.text}
+                    </small>
+
+                  </span>
+
+                  <span class="submenu-arrow">
+                    ›
+                  </span>
+                `;
+
+
+              itemButton.addEventListener(
+                "click",
+                function () {
+
+                  alert(
+                    item.title +
+                    "\n\n" +
+                    item.text
+                  );
+
+                }
+              );
+
+
+              content.appendChild(
+                itemButton
+              );
+
+            }
+          );
+
+
+          overlay.classList.add(
+            "active"
+          );
+
+          overlay.setAttribute(
+            "aria-hidden",
+            "false"
+          );
+
+          document.body.classList.add(
+            "submenu-open"
+          );
+
+        }
+
+
+        /*
+         * Untermenü schließen
+         */
+
+        function closeMenu() {
+
+          overlay.classList.remove(
+            "active"
+          );
+
+          overlay.setAttribute(
+            "aria-hidden",
+            "true"
+          );
+
+          document.body.classList.remove(
+            "submenu-open"
+          );
+
+        }
+
+
+        closeButton.addEventListener(
+          "click",
+          closeMenu
+        );
+
+
+        /*
+         * Klick auf dunklen Hintergrund
+         */
+
+        overlay.addEventListener(
+          "click",
+          function (event) {
+
+            if (
+              event.target === overlay
+            ) {
+
+              closeMenu();
+
+            }
+
+          }
+        );
+
+
+        /*
+         * ESC-Taste
+         */
+
+        document.addEventListener(
+          "keydown",
+          function (event) {
+
+            if (
+              event.key === "Escape"
+            ) {
+
+              closeMenu();
+
+            }
+
+          }
+        );
+
+
+      }
+    );
+
+  </script>
 
 </body>
 </html>
